@@ -17,7 +17,7 @@ namespace MinimumCostMakeArrayEqual
 				numsCost[i] = new int[] { nums[i], cost[i] };
 			}
 			Array.Sort(numsCost, (a, b) => a[0] - b[0]);
-			int[] prefixSum = new int[n + 1];
+			long[] prefixSum = new long[n + 1];
 			for (int i = 0; i < n; ++i)
 			{
 				prefixSum[i + 1] = prefixSum[i] + numsCost[i][1];
@@ -32,7 +32,7 @@ namespace MinimumCostMakeArrayEqual
 			{
 				int gap = numsCost[i][0] - numsCost[i - 1][0];
 				totalCost += 1L * prefixSum[i] * gap;
-				totalCost -= 1L * (prefixSum[n - i + 1] - prefixSum[i]) * gap;
+				totalCost -= 1L * (prefixSum[n] - prefixSum[i]) * gap;
 				minCost = Math.Min(minCost, totalCost);
 			}
 			return minCost;
